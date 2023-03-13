@@ -1,23 +1,41 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {updateData} from '../redux/Action';
 
 const Home = ({navigation}) => {
-  let userDataSelector = useSelector(state => state.usersData);
-  console.log('Home console', userDataSelector);
+  let userDataSelector = useSelector(state => state?.randomData);
+  let Dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('before updatation', userDataSelector);
+    const interval = setInterval(() => {
+      userDataSelector?.map(user => {
+        const newData = user.count + 1;
+        // console.log('userId', user.id);
+        // console.log('newData', newData);
+        Dispatch(updateData(user.id, newData));
+      });
+      console.log('after updatation', userDataSelector);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   const renderItem = ({item}) => {
     return (
       <View style={styles.list}>
-        <Text style={styles.item}>Name - {item.name}</Text>
-        <Text style={styles.item}>Profile - {item.profile}</Text>
-        <Text style={styles.item}>Age - {item.age}</Text>
-        <Text style={styles.item}>Gender - {item.gender}</Text>
+        <Text style={styles.item}>companyName - {item.companyName}</Text>
+        <Text style={styles.item}>Value - {item.dayValue}</Text>
+        <Text style={styles.item}>Index - {item.index}</Text>
+        <Text style={styles.item}>percentage - {item.percentage}</Text>
+        <Text style={styles.item}>Count - {item.count}</Text>
       </View>
     );
   };
   return (
     <View>
       <Text style={styles.head}>Users</Text>
+
       <FlatList
         style={{
           height: '80%',
@@ -26,7 +44,7 @@ const Home = ({navigation}) => {
         }}
         data={userDataSelector}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item?.id}
       />
       <TouchableOpacity
         style={styles.botton}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -6,9 +6,10 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  RefreshControlBase,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
-import {registerUserData} from '../redux/Action';
+import {registerUserData, registerRandomData} from '../redux/Action';
 
 const Register = ({navigation}) => {
   const [Data, SetData] = useState({
@@ -17,26 +18,48 @@ const Register = ({navigation}) => {
     age: '',
     gender: '',
   });
-  const [value, setValue] = useState();
+  const [stockData, setStockData] = useState([]);
+  useEffect(() => {
+    pushStockData();
+  }, []);
 
   const onSubmit = () => {
-    if (
-      Data.name != '' &&
-      Data.profile != '' &&
-      Data.gender != '' &&
-      Data.age != ''
-    ) {
-      userDataDispatch(registerUserData(Data));
-      navigation.navigate('Home');
-      SetData({
-        name: '',
-        profile: '',
-        age: '',
-        gender: '',
+    // code of user user registration
+    // if (
+    //   Data.name != '' &&
+    //   Data.profile != '' &&
+    //   Data.gender != '' &&
+    //   Data.age != ''
+    // ) {
+    //   userDataDispatch(registerUserData(Data));
+    //   navigation.navigate('Home');
+    //   SetData({
+    //     name: '',
+    //     profile: '',
+    //     age: '',
+    //     gender: '',
+    //   });
+    // } else {
+    //   Alert.alert('Fill All The field!');
+    // }
+
+    userDataDispatch(registerRandomData(stockData));
+    navigation.navigate('Home');
+  };
+  const pushStockData = () => {
+    let StockArraydata = [];
+    for (let i = 0; i < 3; i++) {
+      StockArraydata.push({
+        companyName: Math.floor(Math.random() * 99),
+        index: 'NSE',
+        value: Math.floor(Math.random() * 999),
+        dayValue: '35.15',
+        percentage: '1.65',
+        id: i,
+        count: Math.floor(Math.random() * 99),
       });
-    } else {
-      Alert.alert('Fill All The field!');
     }
+    setStockData(StockArraydata);
   };
 
   const userDataDispatch = useDispatch();
@@ -44,7 +67,7 @@ const Register = ({navigation}) => {
     <View style={{backgroundColor: 'white', flex: 1}}>
       <Text style={styles.heading}>Let's Register</Text>
       <View style={styles.middleView}>
-        <TextInput
+        {/* <TextInput
           style={styles.input}
           underlineColorAndroid="transparent"
           placeholder="Name"
@@ -88,7 +111,7 @@ const Register = ({navigation}) => {
           onChangeText={data => {
             SetData({...Data, gender: data});
           }}
-        />
+        /> */}
       </View>
       <TouchableOpacity
         style={styles.botton}
