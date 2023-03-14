@@ -17,27 +17,30 @@ export const Reducer = (state = initialState, action) => {
         ...state,
         randomData: action.data,
       };
-    case UPDATE_DATA:
+    case UPDATE_DATA: {
       console.log('RecievedId', action.userId, 'count', action.payload);
       let updatedUserDetails = state.randomData.map(user => {
-        if (user.id === action.userId) {
-          // console.log('userIdMatch', action.userId, 'count', action.payload);
-
-          return {
-            ...user,
-            count: action.payload,
-          };
-        } else {
-          // console.log('userIdMisMatch', user.id, 'count', user.count);
-          return user;
-        }
+        // if (user.id === action.userId) {
+        //   // console.log('userIdMatch', action.userId, 'count', action.payload);
+        //   return {
+        //     ...user,
+        //     count: action.payload,
+        //   };
+        // } else {
+        //   // console.log('userIdMisMatch', user.id, 'count', user.count);
+        //   return user;
+        // }
+        return {
+          ...user,
+          count: user.count + 1,
+        };
       });
-      console.log('updated details', updatedUserDetails);
 
       return {
         ...state,
         randomData: updatedUserDetails,
       };
+    }
     default:
       return state;
   }

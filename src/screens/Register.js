@@ -48,7 +48,7 @@ const Register = ({navigation}) => {
   };
   const pushStockData = () => {
     let StockArraydata = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 300; i++) {
       StockArraydata.push({
         companyName: Math.floor(Math.random() * 99),
         index: 'NSE',

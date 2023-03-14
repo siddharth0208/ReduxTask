@@ -8,17 +8,17 @@ const Home = ({navigation}) => {
   let Dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('before updatation', userDataSelector);
-    const interval = setInterval(() => {
-      userDataSelector?.map(user => {
-        const newData = user.count + 1;
-        // console.log('userId', user.id);
-        // console.log('newData', newData);
-        Dispatch(updateData(user.id, newData));
-      });
-      console.log('after updatation', userDataSelector);
-    }, 10000);
-    return () => clearInterval(interval);
+    Dispatch(updateData(undefined));
+    // const interval = setInterval(() => {
+    //   userDataSelector?.map(user => {
+    //     const newData = user.count + 1;
+    //     // console.log('userId', user.id);
+    //     // console.log('newData', newData);
+    //     Dispatch(updateData(user.id, newData));
+    //   });
+    //   console.log('after updatation', userDataSelector);
+    // }, 10000);
+    return () => Dispatch(updateData(true));
   }, []);
 
   const renderItem = ({item}) => {
