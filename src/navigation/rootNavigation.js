@@ -1,13 +1,21 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Register from '../screens/Register';
-import Home from '../screens/Home';
 import MyTabs from './topTabNavigation';
+import {useDispatch} from 'react-redux';
+import NetInfo from '@react-native-community/netinfo';
+import {checkInternet} from '../redux/Action';
 const Stack = createNativeStackNavigator();
 
 const MainNavigation = () => {
+  const Dispatch = useDispatch();
+  useEffect(() => {
+    NetInfo.addEventListener(state => {
+      Dispatch(checkInternet(state.isConnected));
+    });
+  }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator>

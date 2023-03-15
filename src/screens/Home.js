@@ -5,7 +5,9 @@ import {updateData} from '../redux/Action';
 
 const Home = ({navigation}) => {
   let userDataSelector = useSelector(state => state?.randomData);
+  let internet = useSelector(state => state?.isConnected);
   let Dispatch = useDispatch();
+  console.log('interenet====>', internet);
 
   useEffect(() => {
     Dispatch(updateData(undefined));
@@ -34,25 +36,39 @@ const Home = ({navigation}) => {
   };
   return (
     <View>
-      <Text style={styles.head}>Users</Text>
-
-      <FlatList
-        style={{
-          height: '80%',
-          width: '90%',
-          alignSelf: 'center',
-        }}
-        data={userDataSelector}
-        renderItem={renderItem}
-        keyExtractor={item => item?.id}
-      />
-      <TouchableOpacity
-        style={styles.botton}
-        onPress={() => {
-          navigation.navigate('Register');
-        }}>
-        <Text style={styles.bottonText}>Back</Text>
-      </TouchableOpacity>
+      {internet ? (
+        <View>
+          <Text style={styles.head}>Users</Text>
+          <FlatList
+            style={{
+              height: '80%',
+              width: '90%',
+              alignSelf: 'center',
+            }}
+            data={userDataSelector}
+            renderItem={renderItem}
+            keyExtractor={item => item?.id}
+          />
+          <TouchableOpacity
+            style={styles.botton}
+            onPress={() => {
+              navigation.navigate('Register');
+            }}>
+            <Text style={styles.bottonText}>Back</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View style={{alignSelf: 'center'}}>
+          <Text
+            style={{
+              color: 'black',
+              fontSize: 25,
+              fontWeight: '500',
+            }}>
+            NO INTERNET!
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

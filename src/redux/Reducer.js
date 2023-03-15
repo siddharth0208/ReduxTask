@@ -1,8 +1,14 @@
-import {REGISTER_DATA, REGISTER_RANDOM_DATA, UPDATE_DATA} from './actionTypes';
+import {
+  REGISTER_DATA,
+  REGISTER_RANDOM_DATA,
+  UPDATE_DATA,
+  CHECK_INTERNET,
+} from './actionTypes';
 
 const initialState = {
   usersData: [],
   randomData: [],
+  isConnected: false,
 };
 
 export const Reducer = (state = initialState, action) => {
@@ -18,7 +24,6 @@ export const Reducer = (state = initialState, action) => {
         randomData: action.data,
       };
     case UPDATE_DATA: {
-      console.log('RecievedId', action.userId, 'count', action.payload);
       let updatedUserDetails = state.randomData.map(user => {
         // if (user.id === action.userId) {
         //   // console.log('userIdMatch', action.userId, 'count', action.payload);
@@ -41,6 +46,12 @@ export const Reducer = (state = initialState, action) => {
         randomData: updatedUserDetails,
       };
     }
+    case CHECK_INTERNET:
+      console.log('action', action.data);
+      return {
+        ...state,
+        isConnected: action.data,
+      };
     default:
       return state;
   }

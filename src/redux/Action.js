@@ -1,4 +1,9 @@
-import {REGISTER_DATA, REGISTER_RANDOM_DATA, UPDATE_DATA} from './actionTypes';
+import {
+  REGISTER_DATA,
+  REGISTER_RANDOM_DATA,
+  UPDATE_DATA,
+  CHECK_INTERNET,
+} from './actionTypes';
 var interval = '';
 export const registerUserData = data => ({
   type: REGISTER_DATA,
@@ -23,3 +28,7 @@ export const updateData = clear => {
     }
   };
 };
+export const checkInternet = data => ({
+  type: CHECK_INTERNET,
+  data,
+});
