@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, AppState} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Register from '../screens/Register';
 import MyTabs from './topTabNavigation';
 import {useDispatch} from 'react-redux';
 import NetInfo from '@react-native-community/netinfo';
-import {checkInternet} from '../redux/Action';
+import {checkInternet, setAppState} from '../redux/Action';
 const Stack = createNativeStackNavigator();
 
 const MainNavigation = () => {
@@ -16,6 +16,19 @@ const MainNavigation = () => {
       Dispatch(checkInternet(state.isConnected));
     });
   }, []);
+  useEffect(() => {
+    const unsubscribe = AppState.addEventListener(
+      'change',
+      handleAppStateChange,
+    );
+    return () => {
+      unsubscribe.remove();
+    };
+  }, []);
+  const handleAppStateChange = nextAppState => {
+    Dispatch(setAppState(nextAppState));
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -40,7 +53,7 @@ const MainNavigation = () => {
             },
             headerShadowVisible: false,
           }}
-          name="Home"
+          name="Tabs"
           component={MyTabs}
         />
       </Stack.Navigator>

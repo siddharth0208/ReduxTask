@@ -10,7 +10,7 @@ function MyTabs() {
   return (
     <Tab.Navigator
       scrollEnabled={true}
-      tabBarOptions={{
+      screenOptions={{
         tabContainerStyle: {width: '100%', paddingHorizontal: 10},
         scrollEnabled: true,
         tabStyle: {height: 40, marginHorizontal: 0},

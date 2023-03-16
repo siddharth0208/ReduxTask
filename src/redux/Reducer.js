@@ -3,12 +3,16 @@ import {
   REGISTER_RANDOM_DATA,
   UPDATE_DATA,
   CHECK_INTERNET,
+  SET_APP_STATE,
 } from './actionTypes';
+import {AppState} from 'react-native';
 
 const initialState = {
   usersData: [],
   randomData: [],
   isConnected: false,
+  priviousAppState: null,
+  currentAppState: null,
 };
 
 export const Reducer = (state = initialState, action) => {
@@ -47,10 +51,15 @@ export const Reducer = (state = initialState, action) => {
       };
     }
     case CHECK_INTERNET:
-      console.log('action', action.data);
       return {
         ...state,
         isConnected: action.data,
+      };
+    case SET_APP_STATE:
+      return {
+        ...state,
+        priviousAppState: state.currentAppState,
+        currentAppState: action.data,
       };
     default:
       return state;

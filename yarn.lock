@@ -1842,6 +1842,13 @@
   "resolved" "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   "version" "15.7.5"
 
+"@types/react-native-keep-awake@^2.0.3":
+  "integrity" "sha512-0C4bUlGPHRpplbn+YnX2UO0/2joa0dhCPumas2fielGNJkS1FTJOrw9jFo4B0+LOtmsepXiy/ANTF/on0b2Ddw=="
+  "resolved" "https://registry.npmjs.org/@types/react-native-keep-awake/-/react-native-keep-awake-2.0.3.tgz"
+  "version" "2.0.3"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-test-renderer@^18.0.0":
   "integrity" "sha512-C7/5FBJ3g3sqUahguGi03O79b8afNeSD6T8/GU50oQrJCU0bVCCGQHaGKUbg2Ce8VQEEqTw8/HiS6lXHHdgkdQ=="
   "resolved" "https://registry.npmjs.org/@types/react-test-renderer/-/react-test-renderer-18.0.0.tgz"
@@ -6045,6 +6052,11 @@
   "integrity" "sha512-7S3pAuPaQJlhax6EZ4JMsDNpj05TfuzX9gPgWLrFfAIWIFLuJ6aDQYAZy2TEI9QJALPoWrj8LWaqP/DGYh14pw=="
   "resolved" "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.15.tgz"
   "version" "0.71.15"
+
+"react-native-keep-awake@^4.0.0":
+  "integrity" "sha512-0Fotox+eLXQooeibVs3P60yASYUWjtRw9MZNmbuHt5UZQrgUrAKsE4jm7gTr4tPU1m1RkwGzcgUFpcOkh/ec7g=="
+  "resolved" "https://registry.npmjs.org/react-native-keep-awake/-/react-native-keep-awake-4.0.0.tgz"
+  "version" "4.0.0"
 
 "react-native-pager-view@*", "react-native-pager-view@^6.1.4", "react-native-pager-view@>= 4.0.0":
   "integrity" "sha512-fmTwgGwPxGCBusKAq7gHzm+s1Yp0qh5rKPoQszaCuxrb+76KgK4Qe82jJNPUp2xTZOKSw+FbJU2QahF8ncTl+w=="

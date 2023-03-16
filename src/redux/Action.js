@@ -3,6 +3,7 @@ import {
   REGISTER_RANDOM_DATA,
   UPDATE_DATA,
   CHECK_INTERNET,
+  SET_APP_STATE,
 } from './actionTypes';
 var interval = '';
 export const registerUserData = data => ({
@@ -30,5 +31,9 @@ export const updateData = clear => {
 };
 export const checkInternet = data => ({
   type: CHECK_INTERNET,
+  data,
+});
+export const setAppState = data => ({
+  type: SET_APP_STATE,
   data,
 });

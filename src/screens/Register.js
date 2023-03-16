@@ -8,7 +8,7 @@ import {
   Alert,
   RefreshControlBase,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {registerUserData, registerRandomData} from '../redux/Action';
 
 const Register = ({navigation}) => {
@@ -19,10 +19,11 @@ const Register = ({navigation}) => {
     gender: '',
   });
   const [stockData, setStockData] = useState([]);
+  let internet = useSelector(state => state?.isConnected);
   useEffect(() => {
     pushStockData();
   }, []);
-
+  let App = useSelector(state => state);
   const onSubmit = () => {
     // code of user user registration
     // if (
@@ -44,7 +45,7 @@ const Register = ({navigation}) => {
     // }
 
     userDataDispatch(registerRandomData(stockData));
-    navigation.navigate('Home');
+    navigation.navigate('Tabs');
   };
   const pushStockData = () => {
     let StockArraydata = [];
@@ -65,9 +66,11 @@ const Register = ({navigation}) => {
   const userDataDispatch = useDispatch();
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>
-      <Text style={styles.heading}>Let's Register</Text>
-      <View style={styles.middleView}>
-        {/* <TextInput
+      {internet ? (
+        <View>
+          <Text style={styles.heading}>Let's Register</Text>
+          <View style={styles.middleView}>
+            {/* <TextInput
           style={styles.input}
           underlineColorAndroid="transparent"
           placeholder="Name"
@@ -112,14 +115,27 @@ const Register = ({navigation}) => {
             SetData({...Data, gender: data});
           }}
         /> */}
-      </View>
-      <TouchableOpacity
-        style={styles.botton}
-        onPress={() => {
-          onSubmit();
-        }}>
-        <Text style={styles.bottonText}>Register</Text>
-      </TouchableOpacity>
+          </View>
+          <TouchableOpacity
+            style={styles.botton}
+            onPress={() => {
+              onSubmit();
+            }}>
+            <Text style={styles.bottonText}>Register</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+          <Text
+            style={{
+              color: 'black',
+              fontSize: 25,
+              fontWeight: '500',
+            }}>
+            NO INTERNET!
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

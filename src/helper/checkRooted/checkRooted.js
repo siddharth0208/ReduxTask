@@ -1,9 +1,10 @@
 import React from 'react';
 import {View, Text, BackHandler, Alert} from 'react-native';
 import JailMonkey from 'jail-monkey';
+import {checkInternet} from '../../helper/checkInternet/checkInternet';
 export const checkRooted = () => {
   const isRooted = JailMonkey.isJailBroken();
-  if (!isRooted) {
+  if (isRooted) {
     console.log('rooted');
     Alert.alert(
       'Device Rooted!',
@@ -20,6 +21,7 @@ export const checkRooted = () => {
     );
   } else {
     console.log('Not Rooted!');
+    // checkInternet();
   }
   return;
 };

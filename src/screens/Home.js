@@ -7,7 +7,6 @@ const Home = ({navigation}) => {
   let userDataSelector = useSelector(state => state?.randomData);
   let internet = useSelector(state => state?.isConnected);
   let Dispatch = useDispatch();
-  console.log('interenet====>', internet);
 
   useEffect(() => {
     Dispatch(updateData(undefined));
@@ -35,7 +34,7 @@ const Home = ({navigation}) => {
     );
   };
   return (
-    <View>
+    <View style={{height: '100%'}}>
       {internet ? (
         <View>
           <Text style={styles.head}>Users</Text>
@@ -58,7 +57,12 @@ const Home = ({navigation}) => {
           </TouchableOpacity>
         </View>
       ) : (
-        <View style={{alignSelf: 'center'}}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: 1,
+          }}>
           <Text
             style={{
               color: 'black',
