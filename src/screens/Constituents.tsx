@@ -7,64 +7,65 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {updateData} from '../redux/Action';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ConstituentsList from '../component/constituentsList';
+import ConstituentsBoxList from '../component/constituentsBoxList';
+
 const Constituents = ({navigation}) => {
-  const [selectedFilter, setSelectedFilter] = useState(0);
-  // let userDataSelector = useSelector(state => state?.randomData);
-  // let internet = useSelector(state => state?.isConnected);
-  // let Dispatch = useDispatch();
+  const [selectedFilter, setSelectedFilter] = useState(1);
+  const [stockData, setStockData] = useState([]);
+  console.log('stockData', stockData);
+  useEffect(() => {
+    pushStockData();
+  }, []);
+  const pushStockData = () => {
+    let StockArraydata = [];
+    for (let i = 0; i < 15; i++) {
+      StockArraydata.push({
+        companyName: 'AXISBANK',
+        title: 'vol.Gainer',
+        index: 'NSE',
+        value: 1035.78 + Math.floor(Math.random() * 999),
+        changes: '+3.65(+0.44%)',
+      });
+    }
+    setStockData(StockArraydata);
+  };
+  const renderItem = ({item}) => {
+    return (
+      <View>
+        <ConstituentsList
+          stockName={item.companyName}
+          stockTtile={item.title}
+          price={item.value}
+          changes={item.changes}
+        />
+        <View
+          style={{
+            borderWidth: 0.2,
+            width: '100%',
+            color: '#EBECF0',
+            marginTop: 23,
+          }}></View>
+      </View>
+    );
+  };
+  const renderItembox = ({item}) => {
+    console.log('item', item);
+    return (
+      <ConstituentsBoxList
+        companyName={item.companyName}
+        price={item.value}
+        changes={item.changes}
+      />
+    );
+  };
 
-  // useEffect(() => {
-  //   Dispatch(updateData(undefined));
-  //   // const interval = setInterval(() => {
-  //   //   userDataSelector?.map(user => {
-  //   //     const newData = user.count + 1;
-  //   //     // console.log('userId', user.id);
-  //   //     // console.log('newData', newData);
-  //   //     Dispatch(updateData(user.id, newData));
-  //   //   });
-  //   //   console.log('after updatation', userDataSelector);
-  //   // }, 10000);
-  //   return () => Dispatch(updateData(true));
-  // }, []);
-
-  // const renderItem = ({item}) => {
-  //   return (
-  //     <View style={styles.list}>
-  //       <Text style={styles.item}>companyName - {item.companyName}</Text>
-  //       <Text style={styles.item}>Value - {item.dayValue}</Text>
-  //       <Text style={styles.item}>Index - {item.index}</Text>
-  //       <Text style={styles.item}>percentage - {item.percentage}</Text>
-  //       <Text style={styles.item}>Count - {item.count}</Text>
-  //     </View>
-  //   );
-  // };
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
         <View style={styles.switchBotton}>
-          <TouchableOpacity
-            style={{
-              width: '50%',
-              height: 30,
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 5,
-              backgroundColor: selectedFilter == 0 ? 'white' : 'transparent',
-            }}
-            onPress={() => {
-              setSelectedFilter(0);
-            }}>
-            <AntDesign
-              name="bars"
-              size={25}
-              color={selectedFilter == 0 ? 'black' : 'gray'}
-            />
-          </TouchableOpacity>
           <TouchableOpacity
             style={{
               width: '50%',
@@ -78,9 +79,27 @@ const Constituents = ({navigation}) => {
               setSelectedFilter(1);
             }}>
             <AntDesign
+              name="bars"
+              size={25}
+              color={selectedFilter == 1 ? 'black' : 'gray'}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              width: '50%',
+              height: 30,
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 5,
+              backgroundColor: selectedFilter == 2 ? 'white' : 'transparent',
+            }}
+            onPress={() => {
+              setSelectedFilter(2);
+            }}>
+            <AntDesign
               name="appstore1"
               size={22}
-              color={selectedFilter == 1 ? 'black' : 'gray'}
+              color={selectedFilter == 2 ? 'black' : 'gray'}
             />
           </TouchableOpacity>
         </View>
@@ -99,12 +118,16 @@ const Constituents = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <ConstituentsList
-        stockName={'AXISBANK'}
-        stockTtile={'vol.galner'}
-        price={'1548.08'}
-        changes={'+3.65(+0.44%)'}
-      />
+      {/* {selectedFilter == 0 ? ( */}
+      <View style={{marginTop: 10, marginBottom: 50, width: '100%'}}>
+        <FlatList
+          key={selectedFilter}
+          numColumns={selectedFilter}
+          data={stockData}
+          renderItem={selectedFilter == 1 ? renderItem : renderItembox}
+          keyExtractor={(_, index) => `item-${index}`}
+        />
+      </View>
     </View>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, BackHandler, Alert} from 'react-native';
 import JailMonkey from 'jail-monkey';
-import {checkInternet} from '../../helper/checkInternet/checkInternet';
+import {checkInternet} from '../checkInternet/checkInternet';
 import SplashScreen from 'react-native-splash-screen';
 export const checkRooted = () => {
   const isRooted = JailMonkey.isJailBroken();

@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-const Market = () => {
+const OptionChain = () => {
   return (
     <View>
       <Text style={{textAlign: 'center', color: 'black'}}>Market</Text>
     </View>
   );
 };
-export default Market;
+export default OptionChain;

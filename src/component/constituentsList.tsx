@@ -17,14 +17,14 @@ const ConstituentsList = props => {
             size={22}
             color="#ffd700"
           />
-          <Text style={{fontSize: 11, color: 'green', paddingTop: 3}}>
+          <Text style={{fontSize: 12, color: 'green', paddingTop: 3}}>
             {props.stockTtile}
           </Text>
         </View>
       </View>
       <View style={{flexDirection: 'row', marginTop: 5}}>
         <View style={{marginRight: 7}}>
-          <Text style={{size: 10, color: 'black', fontWeight: '700'}}>
+          <Text style={{size: 15, color: 'black', fontWeight: '700'}}>
             {props.price}
           </Text>
           <Text
@@ -59,10 +59,12 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    height: 50,
   },
   stockName: {
     color: 'black',
     fontWeight: '700',
+    fontSize: 18,
   },
   bottonView: {
     borderColor: 'black',

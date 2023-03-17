@@ -32,13 +32,13 @@ const MainNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+         <Stack.Screen
           options={{
             headerShown: false,
           }}
           name="Register"
           component={Register}
-        />
+        /> 
         <Stack.Screen
           options={{
             headerTitle: () => (
